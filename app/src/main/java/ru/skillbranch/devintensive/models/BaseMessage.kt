@@ -13,11 +13,11 @@ abstract class BaseMessage(val id: String,
     companion object AbstractFactory {
         var id = -1
 
-        fun makeMessage(from: User?, chat: Chat, date: Date = Date(), payload: Any?, type: String = "text"): BaseMessage {
+        fun makeMessage(from: User?, chat: Chat, date: Date = Date(), type: String = "text", payload: Any?, isIncoming: Boolean = false): BaseMessage {
             id++
             return when (type) {
-                "text" -> TextMessage("$id", from, chat, date = date, text = payload as String)
-                else -> ImageMessage("$id", from, chat, date = date, image = payload as String)
+                "text" -> TextMessage("$id", from, chat, date = date, text = payload as String, isIncoming = isIncoming)
+                else -> ImageMessage("$id", from, chat, date = date, image = payload as String, isIncoming = isIncoming)
             }
         }
     }
